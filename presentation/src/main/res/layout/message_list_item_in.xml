@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.moez.QKSMS.common.widget.QkTextView
+            android:id="@+id/timestamp"
+            style="@style/TextSecondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            tools:text="Tue at 11:39pm" />
+
+        <ImageView
+            android:id="@+id/sim"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="2dp"
+            android:src="@drawable/ic_sim_card_black_24dp"
+            android:tint="?android:attr/textColorSecondary"
+            app:layout_constraintBottom_toBottomOf="@id/timestamp"
+            app:layout_constraintEnd_toStartOf="@id/simIndex"
+            app:layout_constraintStart_toEndOf="@id/timestamp"
+            app:layout_constraintTop_toTopOf="@id/timestamp" />
+
+        <com.moez.QKSMS.common.widget.QkTextView
+            android:id="@+id/simIndex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintBottom_toBottomOf="@id/timestamp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/sim"
+            app:layout_constraintTop_toTopOf="@id/timestamp"
+            app:textSize="tertiary"
+            tools:text="1" />
+    </LinearLayout>
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/avatar">
+
+        <FrameLayout
+            android:id="@+id/xy_mms"
+            android:focusableInTouchMode="false"
+            android:layout_width="268dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rcs_mms_message_bg" />
+
+        <RelativeLayout
+            android:id="@+id/message_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/attachments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="1"
+                tools:listitem="@layout/mms_preview_list_item" />
+
+            <com.moez.QKSMS.common.widget.TightTextView
+                android:id="@+id/body"
+                style="@style/TextPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/attachments"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="2dp"
+                android:autoLink="email|phone|web"
+                android:background="@drawable/message_only"
+                android:gravity="start|center_vertical"
+                android:minHeight="36dp"
+                android:paddingBottom="8dp"
+                android:paddingEnd="12dp"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                tools:backgroundTint="@color/tools_theme"
+                tools:text="@tools:sample/lorem" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <com.moez.QKSMS.common.widget.QkTextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/content"
+        android:layout_gravity="start"
+        android:layout_marginStart="@dimen/rcs_common_size_dp_60"
+        android:layout_marginTop="@dimen/rcs_common_size_dp_10"
+        android:textSize="@dimen/rcs_common_size_dp_10"
+        android:textColor="#66000000"
+        tools:text="Sending..." />
+
+    <com.moez.QKSMS.common.widget.AvatarView
+        android:id="@+id/avatar"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignBottom="@+id/content"
+        android:layout_marginStart="12dp" />
+</RelativeLayout>
